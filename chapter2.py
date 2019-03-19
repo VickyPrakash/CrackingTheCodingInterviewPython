@@ -67,58 +67,32 @@ class SLinkedList:
                 return;
             HeadVal = HeadVal.nextval;
     
-def mergesortlist(unsortedlist):
-    head = unsortedlist.headval;
-    if head is None:
-        print("List is empty");
+    def RemoveDups(self):
+        Headval = self.headval;
+        #print(Headval.dataval);
+        while Headval.nextval is not None:
+            #print("In first while");
+            head2 = Headval.nextval;
+            #print(head2.dataval);
+            prev = head2;
+            while head2.nextval is not None:
+                #print(Headval.dataval);
+                #print("In second while");
+                if (head2.dataval == Headval.dataval):
+                    #print("Entering if");
+                    prev.nextval = head2.nextval;
+                    head2 = prev.nextval;
+                    
+                else:
+                    #print("Else");
+                    prev = head2;
+                    head2 = head2.nextval;
+            
+            Headval = Headval.nextval;
+            #print(Headval)
+            #print("reached this point");
         return;
-    elif head.nextval is None:
-        return unsortedlist;
-    else:
-        middle = getMiddle(unsortedlist);
-        nextmiddle = middle.nextval;
-        middle.nextval = None;
-        
-        left = mergesortlist(head);
-        right = mergesortlist(nextmiddle);
-        
-        sortedlist = mergelist(left, right);
-        return sortedlist;
-    
-def mergelist(list1, list2):
-    if list1 is None:
-        return list2;
-    if list2 is None:
-        return list1;
-    if(list1.dataval < list2.dataval):
-        temp = list1;
-        temp.nextval = mergelist(list1.nextval, list2);
-    else:
-        temp = list2;
-        temp.nextval = mergelist(list1, list2.nextval);
-    
-    return temp;
-    
-def getMiddle(list1):
-    if list1 is None:
-        print("List is empty");
-        return;
-    elif list1.headval.nextval is None:
-        return list1;
-    else:
-        fastlink = list1.headval
-        slowlink = list1.headval;
-        while fastlink.nextval is not None:
-            fastlink = fastlink.nextval
-            if fastlink.nextval is not None:
-                slowlink = slowlink.nextval;
-                fastlink = fastlink.nextval;
-        
-        return slowlink;
-           
-                
-
-        
+            
         
         
 list1 = SLinkedList();
@@ -140,6 +114,13 @@ list2.InsertAtEnd(12);
 list2.InsertAtBeginning(113);
 list2.InsertInBetween(list2.headval, 9);
 list2.InsertAtEnd(2);
-
-list3 = mergesortlist(list2);
-list3.listprint();
+list2.InsertAtEnd(113);
+list2.InsertAtEnd(9);
+list2.InsertAtEnd(9);
+list2.InsertAtEnd(12);
+list2.InsertAtEnd(19);
+list2.InsertAtEnd(12);
+list2.listprint();
+list2.RemoveDups();
+print("No Dups");
+list2.listprint();
